@@ -1,0 +1,41 @@
+<section class="page page-table">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">客户列表</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table no-margin">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>客户名称</th>
+                            <th>公司地址</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="customer in vm.customers">
+                            <td>{{customer.id}}</td>
+                            <td><span class="color-success"><i class="fa fa-level-up"></i></span> {{customer.customerName}}</td>
+                            <td><span class="color-success"><i class="fa fa-level-up"></i></span> {{customer.address}}</td>
+                            <td>
+                                <md-button class="md-icon-button md-warn" aria-label="trash" data-ng-click="vm.delete(customer.id)">
+                                    <span class="fa fa-trash"></span>
+                                </md-button><div class="space"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        <md-button 
+            class="md-fab md-warn plus-button" 
+            aria-label="headphones" 
+            ng-click="vm.transitionToAddCustomer()">
+            <i class="material-icons">add</i>
+        </md-button>
+    </div>
+</section>

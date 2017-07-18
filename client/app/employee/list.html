@@ -1,0 +1,68 @@
+<section class="page page-table">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">员工列表</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <md-table-container>
+                        <table class="table no-margin material-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>姓名</th>
+                                    <th>员工类别</th>
+                                    <th>部门</th>
+                                    <th>入职日期</th>
+                                    <th>税前工资</th>
+                                    <th>税后工资</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-ng-repeat="employee in emp.employees">
+                                    <td>{{employee.id}}</td>
+                                    <td>{{employee.userName}}</td>
+                                    <td>
+                                        <span class="color-success" ng-if="employee.employeeType == 1">定员</span>
+                                        <span class="color-danger" ng-if="employee.employeeType == 2">外包</span>
+                                    </td>
+                                    <td>{{employee.department.name}}</td>
+                                    <td>{{employee.entryDate}}</td>
+                                    <td>
+                                        <span class="color-warning"><i class="fa fa-level-up" ng-if="employee.incomeBeforeTax >= 20000"></i></span>
+                                        <span class="color-success"><i class="fa fa-level-down" ng-if="employee.incomeBeforeTax < 20000"></i></span>
+                                        {{employee.incomeBeforeTax}}
+                                    </td>
+                                    <td>{{employee.incomeAfterTax}}</td>
+                                    <td>
+                                        <md-button class="md-icon-button md-accent" aria-label="details">
+                                        <span class="fa fa-eye"></span>
+                                        </md-button><div class="space"></div>
+                                        <md-button class="md-icon-button" aria-label="edit">
+                                        <span class="fa fa-pencil"></span>
+                                        </md-button><div class="space"></div>
+                                        <md-button class="md-icon-button md-warn"
+                                        aria-label="trash"
+                                        ng-click="emp.delete(employee.id)">
+                                        <span class="fa fa-trash"></span>
+                                        </md-button><div class="space"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+                    <md-table-pagination md-label="{page: '页数', rowsPerPage: '每页显示数据'}" md-limit="emp.query.limit" md-limit-options="emp.limitOptions" md-page="emp.query.page" md-total="{{emp.totalItems}}" md-boundary-links="emp.options.boundaryLinks" md-on-paginate="emp.logPagination"></md-table-pagination>
+                </div>
+            </div>
+        </div>
+        
+        <md-button
+        class="md-fab md-warn plus-button"
+        aria-label="headphones"
+        ng-click="emp.transitionToAddEmployee()">
+        <i class="material-icons">add</i>
+        </md-button>
+    </div>
+</section>

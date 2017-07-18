@@ -1,0 +1,57 @@
+<section class="page page-table">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">津贴清单</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table no-margin material-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>项目</th>
+                            <th>员工</th>
+                            <th>津贴类别</th>
+                            <th>津贴日期</th>
+                            <th>津贴金额</th>
+                            <th>津贴说明</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="allowance in vm.allowances">
+                            <td>{{allowance.id}}</td>
+                            <td>{{allowance.project.projectName}}</td>
+                            <td>{{allowance.employee.userName}}</td>
+                            <td>{{allowance.allowanceType}}</td>
+                            <td>{{allowance.allowanceDate}}</td>
+                            <td>{{allowance.amount}}</td>
+                            <td>{{allowance.intro}}</td>
+                            <td>
+                                <md-button class="md-icon-button md-accent" aria-label="details">
+                                    <span class="fa fa-eye"></span>
+                                </md-button><div class="space"></div>
+                                <md-button class="md-icon-button" aria-label="edit">
+                                    <span class="fa fa-pencil"></span>
+                                </md-button><div class="space"></div>
+                                <md-button class="md-icon-button md-warn" 
+                                aria-label="trash" 
+                                ng-click="vm.delete(allowance.id)">
+                                    <span class="fa fa-trash"></span>
+                                </md-button><div class="space"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        <md-button 
+            class="md-fab md-warn plus-button" 
+            aria-label="headphones" 
+            ng-click="vm.transitionToAddAllowance()">
+            <i class="material-icons">add</i>
+        </md-button>
+    </div>
+</section>

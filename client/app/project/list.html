@@ -1,0 +1,57 @@
+<section class="page page-table">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">项目列表</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table no-margin material-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>项目名称</th>
+                            <th>合同号</th>
+                            <th>甲方单位</th>
+                            <th>项目金额</th>
+                            <th>税后金额</th>
+                            <th>成本线</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="project in vm.projects">
+                            <td>{{project.id}}</td>
+                            <td>{{project.projectName}}</td>
+                            <td>{{project.contractNo}}</td>
+                            <td>{{project.customer.customerName}}</td>
+                            <td>{{project.amountBeforeTax}}</td>
+                            <td>{{project.amountAfterTax}}</td>
+                            <td>{{project.costLine}}</td>
+                            <td>
+                                <md-button class="md-icon-button md-accent" aria-label="details">
+                                    <span class="fa fa-eye"></span>
+                                </md-button><div class="space"></div>
+                                <md-button class="md-icon-button" aria-label="edit">
+                                    <span class="fa fa-pencil"></span>
+                                </md-button><div class="space"></div>
+                                <md-button class="md-icon-button md-warn" 
+                                aria-label="trash" 
+                                ng-click="vm.delete(project.id)">
+                                    <span class="fa fa-trash"></span>
+                                </md-button><div class="space"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        <md-button 
+            class="md-fab md-warn plus-button" 
+            aria-label="headphones" 
+            ng-click="vm.transitionToAddProject()">
+            <i class="material-icons">add</i>
+        </md-button>
+    </div>
+</section>

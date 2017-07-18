@@ -1,0 +1,39 @@
+<section class="page page-table">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">部门列表</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table no-margin">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>部门名称</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="department in dept.departments">
+                            <td>{{department.id}}</td>
+                            <td><span class="color-success"><i class="fa fa-level-up"></i></span> {{department.name}}</td>
+                            <td>
+                                <md-button class="md-icon-button md-warn" aria-label="trash" data-ng-click="dept.delete(department.id)">
+                                    <span class="fa fa-trash"></span>
+                                </md-button><div class="space"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        <md-button 
+            class="md-fab md-warn plus-button" 
+            aria-label="headphones" 
+            ng-click="dept.transitionToDepartment()">
+            <i class="material-icons">add</i>
+        </md-button>
+    </div>
+</section>

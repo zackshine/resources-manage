@@ -1,0 +1,41 @@
+<section class="page-form-ele page">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">新增客户</h2>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body padding-lg">
+                    <form class="form-horizontal">
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2">客户名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="vm.customer.customerName">
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2">单位地址</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="vm.customer.address">
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <md-button type="submit" class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.addCustomer()">新增客户信息</md-button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script type="text/ng-template" id="toast-customer.html">
+        <md-toast class="md-toast-primary">
+            <span flex>客户添加成功!</span>
+            <md-button ng-click="vm.closeToast()">
+                关闭
+            </md-button>
+        </md-toast>
+    </script>
+</section>

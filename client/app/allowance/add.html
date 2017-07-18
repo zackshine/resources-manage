@@ -1,0 +1,84 @@
+<section class="page-form-ele page">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">新增项目津贴</h2>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body padding-lg">
+                    <form class="form-horizontal">
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 select-label">项目名称</label>
+                            <div class="col-sm-10">
+                                <md-select ng-model="vm.allowance.project.id">
+                                    <md-option ng-repeat="project in vm.projects" value="{{project.id}}">
+                                    {{project.projectName}}
+                                    </md-option>
+                                </md-select>
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 select-label">津贴人</label>
+                            <div class="col-sm-10">
+                                <md-select ng-model="vm.allowance.employee.id">
+                                    <md-option ng-repeat="employee in vm.employees" value="{{employee.id}}">
+                                    {{employee.userName}}
+                                    </md-option>
+                                </md-select>
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 select-label">津贴类别</label>
+                            <div class="col-sm-10">
+                                <md-select ng-model="vm.allowance.allowanceType">
+                                    <md-option value="劳动津贴">劳动津贴</md-option>
+                                    <md-option value="生活津贴">生活津贴</md-option>
+                                </md-select>
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2">津贴日期</label>
+                            <div class="col-sm-10">
+                                <md-datepicker ng-model="vm.allowance.allowanceDate" md-placeholder="选择津贴日期"></md-datepicker>
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2">津贴金额</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="vm.allowance.amount">
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2">津贴说明</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" ng-model="vm.allowance.intro" columns="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <md-button type="submit" class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.addAllowance()">新增津贴</md-button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script type="text/ng-template" id="toast-allowance.html">
+        <md-toast class="md-toast-primary">
+            <span flex>津贴添加成功!</span>
+            <md-button ng-click="vm.closeToast()">
+                关闭
+            </md-button>
+        </md-toast>
+    </script>
+</section>

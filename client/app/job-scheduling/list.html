@@ -1,0 +1,72 @@
+<style>
+	.md-datepicker-calendar-pane.md-pane-open {
+		z-index: 9999;
+	}
+</style>
+<div class="page">
+	<div class="row">
+		<div class="col-md-12">
+			<div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+		</div>
+	</div>
+</div>
+<script type="text/ng-template" id="datepicker.tmpl.html">
+		<md-dialog id="jobSchedulingDialog">
+		<md-toolbar><h2 class="text-center">选择时间</h2></md-toolbar>
+		<md-dialog-content>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="" class="col-sm-2 bt-select-label">开始时间</label>
+							<div class="col-sm-10">
+								<select class="form-control" ng-model="startTime">
+						            <option value="8"> 08:00 </option>
+						            <option value="9"> 09:00 </option>
+						            <option value="10"> 10:00 </option>
+						            <option value="11"> 11:00 </option>
+						            <option value="12"> 12:00 </option>
+						            <option value="13"> 13:00 </option>
+						            <option value="14"> 14:00 </option>
+						            <option value="15"> 15:00 </option>
+						            <option value="16"> 16:00 </option>
+						            <option value="17"> 17:00 </option>
+						            <option value="18"> 18:00 </option>
+						            <option value="19"> 19:00 </option>
+						            <option value="20"> 20:00 </option>
+					            </select>
+							</div>
+						</div>
+						<div class="divider divider-dashed divider-lg pull-in"></div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 bt-select-label">结束时间</label>
+							<div class="col-sm-10">
+								<select class="form-control" ng-model="endTime">
+						            <option value="8"> 08:00 </option>
+						            <option value="9"> 09:00 </option>
+						            <option value="10"> 10:00 </option>
+						            <option value="11"> 11:00 </option>
+						            <option value="12"> 12:00 </option>
+						            <option value="13"> 13:00 </option>
+						            <option value="14"> 14:00 </option>
+						            <option value="15"> 15:00 </option>
+						            <option value="16"> 16:00 </option>
+						            <option value="17"> 17:00 </option>
+						            <option value="18"> 18:00 </option>
+						            <option value="19"> 19:00 </option>
+						            <option value="20"> 20:00 </option>
+					            </select>
+							</div>
+						</div>
+						<div class="divider divider-dashed divider-lg pull-in"></div>
+					</form>
+				</div>
+			</div>
+	
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<md-button type="button" class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="closeDialog()">确定</md-button>
+		<!-- <md-button class="md-raised btn-w-md md-default btn-w-md" ng-click="answer('not useful')">取消</md-button> -->
+	</md-dialog-actions>
+</md-dialog>
+</script>

@@ -1,0 +1,93 @@
+<section class="page-form-ele page">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">新增报销单</h2>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body padding-lg">
+                    <form class="form-horizontal">
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 select-label">项目名称</label>
+                            <div class="col-sm-10">
+                                <md-select ng-model="vm.expense.project.id">
+                                    <md-option ng-repeat="project in vm.projects" value="{{project.id}}">
+                                    {{project.projectName}}
+                                    </md-option>
+                                </md-select>
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 select-label">报销人</label>
+                            <div class="col-sm-10">
+                                <md-select ng-model="vm.expense.employee.id">
+                                    <md-option ng-repeat="employee in vm.employees" value="{{employee.id}}">
+                                    {{employee.userName}}
+                                    </md-option>
+                                </md-select>
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2">报销日期</label>
+                            <div class="col-sm-10">
+                                <md-datepicker ng-model=" vm.expense.reportDate" md-placeholder="选择报销日期"></md-datepicker>
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 select-label">费用类型</label>
+                            <div class="col-sm-10">
+                                <md-select ng-model="vm.expense.expenseType">
+                                    <md-option value="通讯补贴">通讯补贴</md-option>
+                                    <md-option value="交通补贴">交通补贴</md-option>
+                                    <md-option value="室内交通费">室内交通费</md-option>
+                                    <md-option value="出差交通费">出差交通费</md-option>
+                                    <md-option value="住宿费">住宿费</md-option>
+                                    <md-option value="餐饮费">餐饮费</md-option>
+                                    <md-option value="房租">房租</md-option>
+                                    <md-option value="快递费">快递费</md-option>
+                                    <md-option value="办公耗材">办公耗材</md-option>
+                                    <md-option value="油费补贴">油费补贴</md-option>
+                                    <md-option value="其他">其他</md-option>
+                                </md-select>
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2">费用明细</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" ng-model="vm.expense.expenseDetail" columns="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2">费用金额</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="vm.expense.amount">
+                            </div>
+                        </div>
+                        <div class="divider divider-dashed divider-lg pull-in"></div>
+
+                        <md-button type="submit" class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.addExpenseAccount()">新增报销单</md-button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script type="text/ng-template" id="toast-expense.html">
+        <md-toast class="md-toast-primary">
+            <span flex>报销单添加成功!</span>
+            <md-button ng-click="vm.closeToast()">
+                关闭
+            </md-button>
+        </md-toast>
+    </script>
+</section>

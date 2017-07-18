@@ -1,0 +1,218 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>西软资源成本控制系统</title>
+        <meta name="description" content="Responsive Admin Web App with Bootstrap and AngularJS">
+        <meta name="keywords" content="angularjs admin, admin templates, admin themes, bootstrap admin">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-touch-fullscreen" content="yes">
+
+        <!-- google fonts -->
+        <script type="text/javascript">
+            WebFontConfig = {
+                google: { families: [ 'Roboto:100,300,400,400italic,500,700:latin' ] }
+            };
+            (function() {
+                var wf = document.createElement('script');
+                wf.src = 'bower_components/webfontloader/webfontloader.js';
+                wf.type = 'text/javascript';
+                wf.async = 'true';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(wf, s);
+            })(); 
+        </script>
+
+
+        <!-- Needs images, font... therefore can not be part of main.css -->
+        <link rel="stylesheet" href="styles/loader.css">
+        <link rel="stylesheet" href="vendors/material-design-icons/iconfont/material-icons.css" rel="stylesheet" >
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+        <!-- end Needs images -->
+
+            
+        <!-- build:css({.tmp,client}) styles/main.css -->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+        <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
+        <link rel="stylesheet" type="text/css" href="bower_components/flatpickr/dist/flatpickr.css">
+        <link rel="stylesheet" type="text/css" href="bower_components/flatpickr/dist/themes/material_green.css">
+        <link rel="stylesheet" href="styles/ui.css">
+        <link rel="stylesheet" href="styles/app.css">
+        <!-- endbuild -->
+
+    </head>
+    <body data-ng-app="app"
+          id="app"
+          class="app"
+          data-custom-page 
+          data-ng-controller="AppCtrl"
+          data-ng-class=" { 'layout-boxed': main.layout === 'boxed', 
+                            'nav-collapsed-min': main.isMenuCollapsed
+          } ">
+        <!--[if lt IE 9]>
+            <div class="lt-ie9-bg">
+                <p class="browsehappy">You are using an <strong>outdated</strong> browser.</p>
+                <p>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            </div>
+        <![endif]-->
+
+        <div id="loader-container"></div>
+
+        <header data-ng-include=" 'app/layout/header.html' "
+                 id="header"
+                 class="header-container "
+                 data-ng-class="{ 'header-fixed': main.fixedHeader,
+                                  'bg-white': ['11','12','13','14','15','16','21'].indexOf(main.skin) >= 0,
+                                  'bg-dark': main.skin === '31',
+                                  'bg-primary': ['22','32'].indexOf(main.skin) >= 0,
+                                  'bg-success': ['23','33'].indexOf(main.skin) >= 0,
+                                  'bg-info': ['24','34'].indexOf(main.skin) >= 0,
+                                  'bg-warning': ['25','35'].indexOf(main.skin) >= 0,
+                                  'bg-danger': ['26','36'].indexOf(main.skin) >= 0
+                 }"></header>
+
+        <div class="main-container"
+             data-ng-class="{ 'app-nav-horizontal': main.menu === 'horizontal' }">
+            <aside data-ng-include=" 'app/layout/sidebar.html' "
+                   id="nav-container"
+                   class="nav-container"  
+                   data-ng-class="{ 'nav-fixed': main.fixedSidebar,
+                                    'nav-horizontal': main.menu === 'horizontal',
+                                    'nav-vertical': main.menu === 'vertical',
+                                    'bg-white': ['31','32','33','34','35','36'].indexOf(main.skin) >= 0,
+                                    'bg-dark': ['31','32','33','34','35','36'].indexOf(main.skin) < 0
+                   }">
+            </aside>
+
+            <div id="content" class="content-container">
+                <section data-ui-view
+                         class="view-container {{main.pageTransition.class}}"></section>
+            </div>
+
+        </div>
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-aria/angular-aria.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.js"></script>
+        <script src="bower_components/angular-touch/angular-touch.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/angular-translate/angular-translate.js"></script>
+        <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+        <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/jquery.slimscroll/jquery.slimscroll.js"></script>
+        <script src="bower_components/jquery.slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+        <script src="bower_components/webfontloader/webfontloader.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/angular-material/angular-material.js"></script>
+        <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+        <script src="bower_components/rangy/rangy-core.js"></script>
+        <script src="bower_components/rangy/rangy-classapplier.js"></script>
+        <script src="bower_components/rangy/rangy-highlighter.js"></script>
+        <script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
+        <script src="bower_components/rangy/rangy-serializer.js"></script>
+        <script src="bower_components/rangy/rangy-textrange.js"></script>
+        <script src="bower_components/angular-material-data-table/dist/md-data-table.js"></script>
+        <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
+        <script src="bower_components/ngECharts/dist/ngecharts.js"></script>
+        <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
+        <script src="bower_components/lodash/lodash.js"></script>
+        <script src="bower_components/restangular/dist/restangular.js"></script>
+        <script src="bower_components/moment/moment.js"></script>
+        <script src="bower_components/flatpickr/dist/flatpickr.js"></script>
+        <script src="bower_components/textAngular/dist/textAngular.js"></script>
+        <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
+        <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
+        <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+        <script src="bower_components/angular-flatpickr/dist/ng-flatpickr.js"></script>
+        <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+        <!-- endinject -->
+        <script src="bower_components/fullcalendar/dist/gcal.js"></script>
+        <script src="bower_components/fullcalendar/dist/lang/zh-cn.js"></script>
+        <script src="bower_components/flatpickr/dist/l10n/zh.js"></script>
+        <!-- endbuild -->
+
+
+        <!-- build:js scripts/ui.js -->
+        <script src="vendors/echarts.js"></script>        
+        <script src="vendors/ngecharts.js"></script>
+        <!-- endbuild -->
+
+
+        <!-- build:js scripts/app.js -->
+        <!-- inject:js -->
+        <script src="app/app.module.js"></script>
+        <script src="app/allowance/allowance.module.js"></script>
+        <script src="app/chart/chart.module.js"></script>
+        <script src="app/core/core.module.js"></script>
+        <script src="app/department/department.module.js"></script>
+        <script src="app/employee/employee.module.js"></script>
+        <script src="app/expense-account/expense-account.module.js"></script>
+        <script src="app/customer/customer.module.js"></script>
+        <script src="app/job-scheduling/job-scheduling.module.js"></script>
+        <script src="app/login/login.module.js"></script>
+        <script src="app/layout/layout.module.js"></script>
+        <script src="app/page/page.module.js"></script>
+        <script src="app/table/table.module.js"></script>
+        <script src="app/form/form.module.js"></script>
+        <script src="app/form/formValidation.module.js"></script>
+        <script src="app/ui/ui.module.js"></script>
+        <script src="app/project/project.module.js"></script>
+        <script src="app/allowance/allowance.controller.js"></script>
+        <script src="app/allowance/allowance.state.js"></script>
+        <script src="app/allowance/allowane.service.js"></script>
+        <script src="app/chart/echarts.controller.js"></script>
+        <script src="app/dashboard/dashboard.controller.js"></script>
+        <script src="app/core/app.config.js"></script>
+        <script src="app/core/app.controller.js"></script>
+        <script src="app/core/config.lazyload.js"></script>
+        <script src="app/core/config.route.js"></script>
+        <script src="app/core/i18n.js"></script>
+        <script src="app/department/department.controller.js"></script>
+        <script src="app/department/department.service.js"></script>
+        <script src="app/department/department.state.js"></script>
+        <script src="app/employee/employee-edit.controller.js"></script>
+        <script src="app/employee/employee.controller.js"></script>
+        <script src="app/employee/employee.service.js"></script>
+        <script src="app/employee/employee.state.js"></script>
+        <script src="app/expense-account/expense-account.controller.js"></script>
+        <script src="app/expense-account/expense-account.service.js"></script>
+        <script src="app/expense-account/expense-account.state.js"></script>
+        <script src="app/customer/customer.controller.js"></script>
+        <script src="app/customer/customer.service.js"></script>
+        <script src="app/customer/customer.state.js"></script>
+        <script src="app/job-scheduling/job-scheduling.controller.js"></script>
+        <script src="app/job-scheduling/job-scheduling.service.js"></script>
+        <script src="app/job-scheduling/job-scheduling.state.js"></script>
+        <script src="app/login/auth.service.js"></script>
+        <script src="app/login/login.controller.js"></script>
+        <script src="app/login/login.state.js"></script>
+        <script src="app/login/user.service.js"></script>
+        <script src="app/layout/customizer.controller.js"></script>
+        <script src="app/layout/layout.diretive.js"></script>
+        <script src="app/layout/loader.js"></script>
+        <script src="app/layout/sidebar.directive.js"></script>
+        <script src="app/page/page.controller.js"></script>
+        <script src="app/page/page.directive.js"></script>
+        <script src="app/table/table.controller.js"></script>
+        <script src="app/form/form.controller.js"></script>
+        <script src="app/form/formValidation.controller.js"></script>
+        <script src="app/form/wizard.controller.js"></script>
+        <script src="app/ui/material.controller.js"></script>
+        <script src="app/ui/ui.controller.js"></script>
+        <script src="app/ui/ui.directive.js"></script>
+        <script src="app/project/project.controller.js"></script>
+        <script src="app/project/project.service.js"></script>
+        <script src="app/project/project.state.js"></script>
+        <!-- endinject -->
+        <!-- endbuild -->
+    </body>
+</html>

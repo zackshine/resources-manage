@@ -1,0 +1,57 @@
+<section class="page page-table">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">报销清单</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table no-margin material-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>项目</th>
+                            <th>报销人</th>
+                            <th>报销日期</th>
+                            <th>费用类型</th>
+                            <th>费用明细</th>
+                            <th>费用金额</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="expense in vm.expenseAccounts">
+                            <td>{{expense.id}}</td>
+                            <td>{{expense.project.projectName}}</td>
+                            <td>{{expense.employee.userName}}</td>
+                            <td>{{expense.reportDate}}</td>
+                            <td>{{expense.expenseType}}</td>
+                            <td>{{expense.expenseDetail}}</td>
+                            <td>{{expense.amount}}</td>
+                            <td>
+                                <md-button class="md-icon-button md-accent" aria-label="details">
+                                    <span class="fa fa-eye"></span>
+                                </md-button><div class="space"></div>
+                                <md-button class="md-icon-button" aria-label="edit">
+                                    <span class="fa fa-pencil"></span>
+                                </md-button><div class="space"></div>
+                                <md-button class="md-icon-button md-warn" 
+                                aria-label="trash" 
+                                ng-click="vm.delete(expense.id)">
+                                    <span class="fa fa-trash"></span>
+                                </md-button><div class="space"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        <md-button 
+            class="md-fab md-warn plus-button" 
+            aria-label="headphones" 
+            ng-click="vm.transitionToAddExpenseAccount()">
+            <i class="material-icons">add</i>
+        </md-button>
+    </div>
+</section>
