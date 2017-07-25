@@ -3,43 +3,27 @@
 
     angular.module('app.project').controller('ProjectCtrl', ProjectCtrl);
 
-    ProjectCtrl.$inject = ['$scope', '$state', '$mdToast', '$document', 'ProjectService', 'CustomerService'];
+    ProjectCtrl.$inject = ['$scope', '$state', '$mdToast', '$document', 'ProjectService', 'pagingParams'];
 
-    function ProjectCtrl($scope, $state, $mdToast, $document, ProjectService, CustomerService) {
+    function ProjectCtrl($scope, $state, $mdToast, $document, ProjectService, pagingParams) {
         var vm = this;
 
-        findAll();
+        findAll(pagingParams);
 
         vm.transitionToAddProject = function() {
             $state.transitionTo('project.add');
         }
 
-        function findAll() {
-        	ProjectService.getList().then(function (result) {
+        function findAll(_pagingParams) {
+        	ProjectService.pagingProjects(_pagingParams).then(function (result) {
         		vm.projects = result.data;
         	});
         }
 
-        vm.addProject = function () {
-        	ProjectService.post(vm.project).then(function (result) {
-        		if (result.data.id) {
-                    $mdToast.show({
-                        controller: 'ProjectCtrl',
-                        templateUrl: 'toast-project.html',
-                        parent : $document[0].querySelector('#toastBounds'),
-                        hideDelay: 4000,
-                        position: 'top right'
-                    });
-                }
-        	});
+        vm.delete = function deleteProject (id) {
+            ProjectService.findOne(id).remove().then(function (response) {
+                findAll(pagingParams);
+            });
         }
-
-        vm.closeToast = function() {
-            $mdToast.hide();
-        };
-
-        CustomerService.getList().then(function (result) {
-        	vm.customers = result.data;
-        });
     }
 })();

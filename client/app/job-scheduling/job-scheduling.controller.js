@@ -6,17 +6,25 @@
 	 * 员工排班
 	 */
 	angular.module('app.jobScheduling').controller('JobSchedulingCtrl', JobSchedulingCtrl);
-	JobSchedulingCtrl.$inject = ['$scope', '$state', '$compile', 'uiCalendarConfig', '$mdDialog', 'JobSchedulingService'];
+	JobSchedulingCtrl.$inject = ['$scope', '$state', '$compile', 'uiCalendarConfig', '$mdDialog', 'JobSchedulingService', 'EmployeeService', 'ProjectService'];
 
-	function JobSchedulingCtrl($scope, $state, $compile, uiCalendarConfig, $mdDialog, JobSchedulingService) {
+	function JobSchedulingCtrl($scope, $state, $compile, uiCalendarConfig, $mdDialog, JobSchedulingService, EmployeeService, ProjectService) {
 		var vm = this;
 		var date = new Date();
 		var d = date.getDate();
 		var m = date.getMonth();
 		var y = date.getFullYear();
 
-		$scope.startTime = '8:00';
-		$scope.endTime = '8:00';
+		$scope.startTime = '8';
+		$scope.endTime = '8';
+
+		EmployeeService.employeeService().getList().then(function (result) {
+        	vm.employees = result.data;
+        });
+
+        ProjectService.getList().then(function (result) {
+			vm.projects = result.data;
+		});
 
 		/* event source that pulls from google.com */
 		$scope.eventSource = {
@@ -138,41 +146,45 @@
 			});
 			$compile(element)($scope);
 		};
-		// dayclick event
 
-		function dayClick(date, jsEvent, view) {
-			console.group('day click start');
-			console.log(date.format());
-			console.log(jsEvent.pageX);
-			console.log(jsEvent.pageY);
-			console.groupEnd('day click end');
-			$scope.events.push({
-				type: 'Hello',
-				title: 'Open Sesame',
-				start: new Date(y, m, 6, 8, 0),
-				end: new Date(y, m, 6, 15, 0),
-				className: ['openSesame'],
-				allDay: false
-			});
-			showDatepickerDialog(jsEvent);
-			// $(this).css('background-color', '#5B9E77');
+		$scope.selectTimeRang = function (start, end, jsEvent, view) {
+			console.group('selectTimeRang');
+			console.log(start.format());
+			console.log(end.format());
+			console.groupEnd();
+			$("#calendar").fullCalendar('addEventSource', [{
+		        start: start,
+		        end: end,
+		        rendering: 'background',
+		        block: true,
+		    }, ]);
+		    $("#calendar").fullCalendar("unselect");
+		    showDatepickerDialog(jsEvent, start, end);
 		}
+
+		$scope.selectOverlap = function (event) {
+			return ! event.block;
+		}
+
 		/* config object */
 		$scope.uiConfig = {
 			calendar: {
 				height: '100%',
 				editable: true,
 				droppable: true,
+				selectable: true,
+				timezone: 'Asia/Shanghai',
 				header: {
 					left: 'title',
 					center: '',
 					right: 'today prev,next'
 				},
-				dayClick: dayClick,
 				eventClick: $scope.alertOnEventClick,
 				eventDrop: $scope.alertOnDrop,
 				eventResize: $scope.alertOnResize,
 				eventRender: $scope.eventRender,
+				select: $scope.selectTimeRang,
+				selectOverlap: $scope.selectOverlap,
 				dayNames: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
 				dayNamesShort: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
 				monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
@@ -183,33 +195,9 @@
 		$scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
 		$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
-		$scope.dateOpts = {
-			defaultDate: '08:00',
-			dateFormat: 'H:i',
-			enableTime: true,
-			noCalendar: true,
-			time_24hr: true,
-			defaultHour: 8,
-			defaultMinute: 0,
-			minuteIncrement: 30,
-			locale: 'zh',
-			onChange: closeTimepicker
-		};
-
-		$scope.datePostSetup = function(fpItem) {
-			console.log('flatpickr', fpItem);
-		}
-
-		function closeTimepicker(selectedDates, dateStr, instance) {
-			console.log(selectedDates);
-			console.log(dateStr);
-			console.log(instance);
-		}
-
 		// dialog
 
-
-		function showDatepickerDialog(ev) {
+		function showDatepickerDialog(ev, start, end) {
 			$mdDialog.show({
 					controller: JobSchedulingCtrl,
 					templateUrl: 'datepicker.tmpl.html',
@@ -218,9 +206,13 @@
 					clickOutsideToClose: true,
 					fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
 				})
-				.then(function(answer) {
-					$scope.status = 'You said the information was "' + answer + '".';
+				.then(function() {
+					$scope.status = 'You said the information was.';
 				}, function() {
+					console.group('dialog time');
+					console.log(start.format());
+					console.log(end.format());
+					console.groupEnd();
 					$scope.status = 'You cancelled the dialog.';
 				});
 		}

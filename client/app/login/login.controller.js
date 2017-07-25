@@ -3,9 +3,9 @@
 
   angular.module("app.login").controller("LoginCtrl", LoginCtrl);
 
-  LoginCtrl.$inject = ["$rootScope", "$scope", "Auth", "UserService"];
+  LoginCtrl.$inject = ["$rootScope", "$scope", "Auth", "UserService", '$state'];
 
-  function LoginCtrl($rootScope, $scope, Auth, UserService) {
+  function LoginCtrl($rootScope, $scope, Auth, UserService, $state) {
     var certificate = ($scope.User = {
       username: null,
       password: null
@@ -27,6 +27,7 @@
             localStorage.setItem("currentUser", result.data.firstName);
           });
         });
+        $state.transitionTo('dashboard');
       }
     };
   }

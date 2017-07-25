@@ -68,7 +68,17 @@
                         </div>
                         <div class="divider divider-dashed divider-lg pull-in"></div>
 
-                        <md-button type="submit" class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.addProject()">新增项目</md-button>
+                        <div class="col-sm-12 col-sm-offset-2">
+                            <md-button 
+                            ng-if="!vm.project.id"
+                            type="submit" 
+                            class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.addProject()">新增项目</md-button>
+
+                            <md-button 
+                            ng-if="vm.project.id"
+                            type="submit" 
+                            class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.editProject(project.id)">修改项目信息</md-button>
+                        </div>
                     </form>
                 </div>
             </section>
@@ -76,7 +86,7 @@
     </div>
     <script type="text/ng-template" id="toast-project.html">
         <md-toast class="md-toast-primary">
-            <span flex>项目添加成功!</span>
+            <span flex>项目保存成功!</span>
             <md-button ng-click="vm.closeToast()">
                 关闭
             </md-button>

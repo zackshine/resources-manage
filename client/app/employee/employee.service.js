@@ -8,15 +8,20 @@
     function EmployeeService(Restangular) {
         return {
         	pagingEmployees: pagingEmployees,
-        	employeeService: employeeService
+        	service: service,
+            findOne: findOne
         }
 
         function pagingEmployees(pagingParams) {
         	return Restangular.all('api/employees?page=' + pagingParams.page + "&size=" + pagingParams.size);
         }
 
-        function employeeService () {
+        function service () {
         	return Restangular.all('api/employees');
+        }
+
+        function findOne (params) {
+            return Restangular.one('api/employees/' + params.id);
         }
     }
 })();

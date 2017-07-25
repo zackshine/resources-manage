@@ -8,22 +8,14 @@
 	*/
 	module('app.allowance').controller('AllowanceCtrl', AllowanceCtrl);
 
-	AllowanceCtrl.$inject = ['$state', '$mdToast', '$document', 'EmployeeService', 'ProjectService', 'AllowanceService'];
+	AllowanceCtrl.$inject = ['$state', 'EmployeeService', 'ProjectService', 'AllowanceService', 'pagingParams'];
 
-	function AllowanceCtrl ($state, $mdToast, $document, EmployeeService, ProjectService, AllowanceService) {
+	function AllowanceCtrl ($state, EmployeeService, ProjectService, AllowanceService, pagingParams) {
 		var vm = this;
-		findAll();
+		findAll(pagingParams);
 
-		ProjectService.getList().then(function (result) {
-			vm.projects = result.data;
-		});
-
-		EmployeeService.employeeService().getList().then(function (result) {
-        	vm.employees = result.data;
-        });
-
-        function findAll () {
-        	AllowanceService.getList().then(function (response) {
+        function findAll (_pagingParams) {
+        	AllowanceService.paging(_pagingParams).getList().then(function (response) {
         		vm.allowances = response.data;
         	});
         }
@@ -32,22 +24,13 @@
 			$state.transitionTo('allowance.add');
 		}
 
-		vm.addAllowance = function() {
-			AllowanceService.post(vm.allowance).then(function(response) {
-				if (response.data.id) {
-					$mdToast.show({
-                        controller: 'AllowanceCtrl',
-                        templateUrl: 'toast-allowance.html',
-                        parent : $document[0].querySelector('#toastBounds'),
-                        hideDelay: 4000,
-                        position: 'top right'
-                    });
+		vm.delete = function deleteAllowance (id) {
+			AllowanceService.findOne(id).remove().then(function (response) {
+				if (response.status === 200) {
+					findAll(pagingParams);
 				}
 			});
 		}
-
-		vm.closeToast = function() {
-            $mdToast.hide();
-        };
+		
 	}
 })();

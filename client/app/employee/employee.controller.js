@@ -47,8 +47,8 @@
         }
 
         emp.delete = function(id) {
-            EmployeeService.one(id).remove().then(function() {
-                findAll();
+            EmployeeService.findOne({id: id}).remove().then(function() {
+                findAll(pagingParams);
             });
         }
     }

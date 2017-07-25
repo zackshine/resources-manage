@@ -23,8 +23,10 @@
                             </div>
                         </div>
                         <div class="divider divider-dashed divider-lg pull-in"></div>
-
-                        <md-button type="submit" class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.addCustomer()">新增客户信息</md-button>
+                        <div class="col-sm-12 col-sm-offset-2">
+                            <md-button ng-if="!vm.customer.id" type="submit" class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.addCustomer()">新增客户信息</md-button>
+                            <md-button ng-if="vm.customer.id" type="submit" class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.updateCustomer()">修改客户信息</md-button>
+                        </div>
                     </form>
                 </div>
             </section>
@@ -32,7 +34,7 @@
     </div>
     <script type="text/ng-template" id="toast-customer.html">
         <md-toast class="md-toast-primary">
-            <span flex>客户添加成功!</span>
+            <span flex ng-if="!vm.customer.id">客户信息保存成功!</span>
             <md-button ng-click="vm.closeToast()">
                 关闭
             </md-button>

@@ -22,7 +22,7 @@
                             </thead>
                             <tbody>
                                 <tr data-ng-repeat="employee in emp.employees">
-                                    <td>{{employee.id}}</td>
+                                    <td>{{$index + 1}}</td>
                                     <td>{{employee.userName}}</td>
                                     <td>
                                         <span class="color-success" ng-if="employee.employeeType == 1">定员</span>
@@ -40,9 +40,11 @@
                                         <md-button class="md-icon-button md-accent" aria-label="details">
                                         <span class="fa fa-eye"></span>
                                         </md-button><div class="space"></div>
-                                        <md-button class="md-icon-button" aria-label="edit">
+
+                                        <md-button ui-sref="employee.edit({id: employee.id})" class="md-icon-button" aria-label="edit">
                                         <span class="fa fa-pencil"></span>
                                         </md-button><div class="space"></div>
+
                                         <md-button class="md-icon-button md-warn"
                                         aria-label="trash"
                                         ng-click="emp.delete(employee.id)">

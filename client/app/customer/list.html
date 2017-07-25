@@ -6,6 +6,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
             <div class="panel-body">
+                <md-table-container>
                 <table class="table no-margin">
                     <thead>
                         <tr>
@@ -21,6 +22,10 @@
                             <td><span class="color-success"><i class="fa fa-level-up"></i></span> {{customer.customerName}}</td>
                             <td><span class="color-success"><i class="fa fa-level-up"></i></span> {{customer.address}}</td>
                             <td>
+                                <md-button ui-sref="customer.edit({id:customer.id})" class="md-icon-button" aria-label="edit">
+                                <span class="fa fa-pencil"></span>
+                                </md-button><div class="space"></div>
+
                                 <md-button class="md-icon-button md-warn" aria-label="trash" data-ng-click="vm.delete(customer.id)">
                                     <span class="fa fa-trash"></span>
                                 </md-button><div class="space"></div>
@@ -28,6 +33,8 @@
                         </tr>
                     </tbody>
                 </table>
+            </md-table-container>
+            <md-table-pagination md-label="{page: '页数', rowsPerPage: '每页显示数据'}" md-limit="vm.query.limit" md-limit-options="vm.limitOptions" md-page="vm.query.page" md-total="{{vm.totalItems}}" md-boundary-links="vm.options.boundaryLinks" md-on-paginate="vm.logPagination"></md-table-pagination>
             </div>
             </div>
         </div>

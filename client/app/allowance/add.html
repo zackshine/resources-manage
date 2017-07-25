@@ -66,8 +66,11 @@
                             </div>
                         </div>
                         <div class="divider divider-dashed divider-lg pull-in"></div>
-
-                        <md-button type="submit" class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.addAllowance()">新增津贴</md-button>
+                        
+                        <div class="col-sm-12 col-sm-offset-2">
+                        <md-button ng-if="!vm.allowance.id" type="submit" class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.addAllowance()">新增津贴</md-button>
+                        <md-button ng-if="vm.allowance.id" type="submit" class="md-raised btn-w-md md-primary btn-w-md" data-ng-click="vm.update()">修改津贴信息</md-button>
+                    </div>
                     </form>
                 </div>
             </section>
@@ -75,7 +78,7 @@
     </div>
     <script type="text/ng-template" id="toast-allowance.html">
         <md-toast class="md-toast-primary">
-            <span flex>津贴添加成功!</span>
+            <span flex>津贴保存成功!</span>
             <md-button ng-click="vm.closeToast()">
                 关闭
             </md-button>

@@ -4,9 +4,41 @@
 	}
 </style>
 <div class="page">
+	
 	<div class="row">
 		<div class="col-md-12">
-			<div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+			<section class="panel panel-default">
+                <div class="panel-body padding-xl">
+                	<div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                <div layout-padding>
+					<form>
+						<div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>项目名称</label>
+                                <md-select ng-model="vm.project.id">
+		                            <md-option ng-repeat="project in vm.projects" value="{{project.id}}">
+		                            {{project.projectName}}
+		                            </md-option>
+		                        </md-select>
+                            </md-input-container>
+                        </div>
+						<div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>员工</label>
+                                <md-select ng-model="vm.employee.id">
+	                                <md-option ng-repeat="employee in vm.employees" value="{{employee.id}}">
+	                                {{employee.userName}}
+	                                </md-option>
+	                            </md-select>
+                            </md-input-container>
+                        </div>
+					</form>
+				</div>
+			</div>
+			<div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+
+                </div>
+            </section>
 		</div>
 	</div>
 </div>

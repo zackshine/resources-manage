@@ -80,6 +80,7 @@
                 'default': '500'
             })
             .backgroundPalette('grey');
+
         RestangularProvider.setFullResponse(true).setBaseUrl('http://localhost:8080/');
         RestangularProvider.setFullRequestInterceptor(function(element, operation, route, url, headers, params, httpConfig) {
             var jwt = localStorage.getItem('id_token');

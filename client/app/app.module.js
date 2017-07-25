@@ -24,7 +24,22 @@
         ,'app.expenseAccount'
         ,'app.allowance'
         ,'app.jobScheduling'
-    ]);
+    ]).run(['$rootScope', '$location', '$window', 'Restangular', function ($rootScope, $location, $window, Restangular) {
+        $rootScope.$on('$stateChangeStart', function (evnet, toState, toParams, fromState, fromParams, options) {
+            if (toState.name != 'login') {
+                var token = localStorage.getItem('id_token');
+                if (!token) {
+                    $location.path('/login');
+                }
+            }
+        });
+
+        Restangular.setErrorInterceptor(function (response, deferred, responseHandler) {
+            if (response.status == 401) {
+                $location.path('/login');
+            }
+        });
+    }]);
 
 })();
 
